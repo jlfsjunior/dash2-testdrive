@@ -1,5 +1,10 @@
 from components.aio_component import MarkdownWithColorAIO
+from components.datatable_aio import DataTableAIO
+
 from dash import Dash, html, callback, Input, Output, State
+import plotly.express as px
+
+df = px.data.iris()
 
 app = Dash(__name__)
 
@@ -13,13 +18,16 @@ app = Dash(__name__)
 #     }
 # )
 
-app.layout = html.Div([
-    MarkdownWithColorAIO(
-        'Custom callback',
-        aio_id='color-picker'
-    ),
-    html.Div(id='color-picker-output')
-])
+app.layout = html.Div(
+    [
+        MarkdownWithColorAIO(
+            'Custom callback',
+            aio_id='color-picker'
+        ),
+        html.Div(id='color-picker-output'),
+        DataTableAIO(df)
+    ]
+)
 
 @callback(
     Output('color-picker-output', 'children'),
