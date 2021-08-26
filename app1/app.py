@@ -1,5 +1,6 @@
 from components.aio_component import MarkdownWithColorAIO
-from components.datatable_aio import DataTableAIO
+# from components.datatable_aio import DataTableAIO
+from components.my_aio import SimpleFormAIO
 
 from dash import Dash, html, callback, Input, Output, State
 import plotly.express as px
@@ -25,7 +26,8 @@ app.layout = html.Div(
             aio_id='color-picker'
         ),
         html.Div(id='color-picker-output'),
-        DataTableAIO(df)
+        SimpleFormAIO(id="my-aio"),
+        # DataTableAIO(df)
     ]
 )
 
