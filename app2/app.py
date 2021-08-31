@@ -46,6 +46,7 @@ app.layout = html.Div(
     ],
     cancel=[Input("cancel_button_id", "n_clicks")],
     progress=[Output("progress_bar", "value"), Output("progress_bar", "max")],
+    prevent_initial_call=True,
 )
 def callback(set_progress, n_clicks):
     total = 10
