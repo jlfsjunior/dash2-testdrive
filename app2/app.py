@@ -19,7 +19,7 @@ app.layout = html.Div(
         html.Div(
             [
                 html.P(id="paragraph_id", children=["Button not clicked"]),
-                html.Progress(id="progress_bar"),
+                html.Progress(id="progress_bar", style={"visibility": "hidden"}),
             ]
         ),
         html.Button(id="button_id", children="Run Job!"),
