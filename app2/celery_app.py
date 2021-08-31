@@ -5,10 +5,12 @@ from dash.long_callback import CeleryLongCallbackManager
 from dash.dependencies import Input, Output
 from celery import Celery
 
-celery_app = Celery(
-    __name__, broker="redis://localhost:6379/0", backend="redis://localhost:6379/1"
+celery = Celery(
+    __name__, 
+    broker="redis://localhost:6379/0", 
+    backend="redis://localhost:6379/1"
 )
-long_callback_manager = CeleryLongCallbackManager(celery_app)
+long_callback_manager = CeleryLongCallbackManager(celery)
 
 app = dash.Dash(__name__, long_callback_manager=long_callback_manager)
 
@@ -28,6 +30,7 @@ app.layout = html.Div(
         (Output("cancel_button_id", "disabled"), False, True),
     ],
     cancel=[Input("cancel_button_id", "n_clicks")],
+    prevent_initial_call=True,
 )
 def callback(n_clicks):
     time.sleep(2.0)
