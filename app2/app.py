@@ -1,8 +1,8 @@
 import time
 import dash
-from dash import html
+from dash import html, Input, Output
 from dash.long_callback import DiskcacheLongCallbackManager
-from dash.dependencies import Input, Output
+import dash_bootstrap_components as dbc
 
 ## Diskcache
 import diskcache
@@ -11,6 +11,7 @@ long_callback_manager = DiskcacheLongCallbackManager(cache)
 
 app = dash.Dash(
     __name__,
+    external_stylesheets=[dbc.themes.BOOTSTRAP],
     long_callback_manager=long_callback_manager,
 )
 
@@ -22,8 +23,8 @@ app.layout = html.Div(
                 html.Progress(id="progress_bar", style={"visibility": "hidden"}),
             ]
         ),
-        html.Button(id="button_id", children="Run Job!"),
-        html.Button(id="cancel_button_id", children="Cancel Running Job!"),
+        dbc.Button(id="button_id", children="Run Job!"),
+        dbc.Button(id="cancel_button_id", children="Cancel Running Job!"),
     ]
 )
 
